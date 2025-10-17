@@ -34,18 +34,23 @@ cd Healthcare-Management-System
 
 ### 2️⃣ Install the required libraries
 ```bash
-Install the required libraries
+pip install -r requirements.txt
 ```
 
 ### 3️⃣ Set up your MySQL database
 - Open MySQL Workbench or any MySQL client.
 - Create a database named healthcare_db.
 - Update your MySQL username and password inside app.py here:
-```bash
+```
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:Password@localhost/healthcare_db'
 ```
 
 ### 4️⃣ Run the application
+```bash
+python app.py
+```
+
+### 5️⃣ Access it in your browser
 ```bash
 http://127.0.0.1:5000/
 ```
