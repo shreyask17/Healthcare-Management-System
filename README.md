@@ -51,7 +51,3 @@ http://127.0.0.1:5000/
 ```
 
 ⚠️ Note: Make sure your MySQL server is running before you start the Flask app.
-
-
-### 5️⃣ 
-```bash
