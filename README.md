@@ -77,6 +77,7 @@ python app.py
 
 🗂️ Project Structure
 Healthcare-Management-System/
+```bash
 │
 ├── static/                  # CSS, JS, and images
 ├── templates/               # HTML templates (index, login, dashboard, etc.)
@@ -85,6 +86,7 @@ Healthcare-Management-System/
 ├── requirements.txt         # All dependencies
 ├── .env                     # Environment variables (DB credentials)
 └── README.md                # Project documentation
+```
 
 ---
 
