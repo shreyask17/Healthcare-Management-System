@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">🏥 Healthcare Management Dashboard</h2>
+
+    <div class="row justify-content-center">
+        <!-- Patients Card -->
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card dashboard-card text-center p-4">
+                <div class="card-icon card-bg-patient mb-3">
+                    <i class="fas fa-user-injured"></i>
+                </div>
+                <h5>Total Patients</h5>
+                <h3 class="fw-bold">{{ total_patients }}</h3>
+                <a href="{{ url_for('view_patients') }}" class="btn btn-primary mt-3">View Patients</a>
+            </div>
+        </div>
+
+        <!-- Doctors Card -->
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card dashboard-card text-center p-4">
+                <div class="card-icon card-bg-doctor mb-3">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h5>Total Doctors</h5>
+                <h3 class="fw-bold">{{ total_doctors }}</h3>
+                <a href="{{ url_for('view_doctors') }}" class="btn btn-success mt-3">View Doctors</a>
+            </div>
+        </div>
+
+        <!-- Appointments Card -->
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card dashboard-card text-center p-4">
+                <div class="card-icon card-bg-appointment mb-3">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h5>Total Appointments</h5>
+                <h3 class="fw-bold">{{ total_appointments }}</h3>
+                <a href="{{ url_for('view_appointments') }}" class="btn btn-warning mt-3">View Appointments</a>
+            </div>
+        </div>
+    </div>
+
+{% if current_user.is_authenticated and current_user.role == 'patient' %}
+<div class="text-center mt-4">
+    <a href="{{ url_for('book') }}" class="btn btn-outline-primary px-4 py-2">
+        <i class="fas fa-plus-circle"></i> Add Appointment
+    </a>
+</div>
+{% endif %}
+
+</div>
+
+<!-- Dashboard Card Styling -->
+<style>
+.dashboard-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 15px;
+}
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.card-icon {
+    font-size: 40px;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* stronger shadow on hover */
+}
+.card-bg-patient { background-color: #0d6efd; }
+.card-bg-doctor { background-color: #198754; }
+.card-bg-appointment { background-color: #ffc107; }
+</style>
+{% endblock %}

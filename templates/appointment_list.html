@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Appointment List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">All Appointments</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">← Back to Dashboard</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Problem</th>
+                <th>Status</th>
+                {% if current_user.is_authenticated and current_user.role == 'doctor' %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for appt in appointments %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ appt.patient.username }}</td>
+                <td>{{ appt.doctor.name }}</td>
+                <td>{{ appt.date }}</td>
+                <td>{{ appt.time.strftime('%H:%M') if appt.time else '' }}</td>
+                <td>{{ appt.problem_description }}</td>
+                <td>{{ appt.status }}</td>
+                {% if current_user.is_authenticated and current_user.role == 'doctor' %}
+                <td>
+                    <a href="{{ url_for('update_status', id=appt.id, status='Pending') }}" class="btn btn-warning btn-sm">Pending</a>
+                    <a href="{{ url_for('update_status', id=appt.id, status='Success') }}" class="btn btn-success btn-sm">Success</a>
+                    <a href="{{ url_for('delete_appointment', id=appt.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8" class="text-center">No appointments found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

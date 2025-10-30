@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Book Appointment{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h2 class="mb-4 text-center">Book Appointment</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.patient_id.label(class="form-label") }}
+        {{ form.patient_id(class="form-select d-none") }}
+      </div>
+      <div class="mb-3">
+        {{ form.doctor_id.label(class="form-label") }}
+        {{ form.doctor_id(class="form-select") }}
+      </div>
+      <div class="mb-3">
+        {{ form.date.label(class="form-label") }}
+        {{ form.date(class="form-control") }}
+      </div>
+      <div class="mb-3">
+        {{ form.time.label(class="form-label") }}
+        {{ form.time(class="form-control") }}
+      </div>
+      <div class="mb-3">
+        {{ form.problem_description.label(class="form-label") }}
+        {{ form.problem_description(class="form-control", rows="3") }}
+      </div>
+      {{ form.submit(class="btn btn-success w-100") }}
+    </form>
+  </div>
+</div>
+{% endblock %}

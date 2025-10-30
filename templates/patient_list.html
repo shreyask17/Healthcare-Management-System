@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Patient List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">All Patients</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">← Back to Dashboard</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                {% if current_user.is_authenticated and current_user.role == 'doctor' %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ patient.username }}</td>
+                {% if current_user.is_authenticated and current_user.role == 'doctor' %}
+                <td>
+                    <a href="{{ url_for('delete_patient', id=patient.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="text-center">No patients found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
